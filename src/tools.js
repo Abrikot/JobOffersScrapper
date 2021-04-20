@@ -1,6 +1,7 @@
 const fs = require('fs');
+const config = require('./config');
 
-const ignoredCompaniesFile = 'ignoredCompanies.json';
+const ignoredCompaniesFile = config.ignoredCompaniesFile;
 const maxOffersPerCompany = 10;
 
 function getIgnoredCompanies() {
