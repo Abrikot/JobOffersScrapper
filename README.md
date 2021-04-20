@@ -6,6 +6,8 @@ Scrapping common websites to find the job offer you are looking for!
 Install Node.js.
 Run `npm install` inside the workspace. This will instace the dependencies this project requires.
 
+If you don't want to scrap a website, you can simply comment its line out in the `src/config.js` file. 
+
 If scrapping LinkedIn, create a `src/websites/credentials.js` file containing the following:
 ```
 module.exports = {
