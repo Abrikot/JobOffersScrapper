@@ -6,5 +6,6 @@ module.exports = {
         'APEC': 'apec.js',
         'Welcome to the Jungle': 'wttj.js',
         'LinkedIn': 'linkedin.js'
-    }
+    },
+    maxOffersPerCompany: 10
 }

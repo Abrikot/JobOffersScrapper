@@ -2,7 +2,7 @@ const fs = require('fs');
 const config = require('./config');
 
 const ignoredCompaniesFile = config.ignoredCompaniesFile;
-const maxOffersPerCompany = 10;
+const maxOffersPerCompany = config.maxOffersPerCompany;
 
 function getIgnoredCompanies() {
     const ignoredCompanies = JSON.parse(fs.readFileSync(ignoredCompaniesFile, 'utf-8') || '[]');
