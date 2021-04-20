@@ -1,4 +1,4 @@
-# WorkOffersScrapper
+# JobOffersScrapper
 
 Scrapping common websites to find the job offer you are looking for!
 
