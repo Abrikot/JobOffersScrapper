@@ -33,22 +33,25 @@ async function getAllOffers(website, query) {
         offers.push(...newOffers);
         startIndex += newOffers.length;
         console.log(startIndex, 'of', totalNumber);
+        if (newOffers.length === 0) {
+            break;
+        }
     } while (startIndex < totalNumber)
 
     return offers;
 }
 
 function filterOffers(website, offers) {
-    const groupedOffers = groupBy(offers, 'firm');
+    const groupedOffers = groupBy(offers, 'company');
     const ignoredCompanies = getIgnoredCompanies();
-    for (const [firm, offers] of Object.entries(groupedOffers)) {
-        if (offers.length >= maxOffersPerCompany && !ignoredCompanies.includes(firm.toLowerCase())) {
-            ignoredCompanies.push(firm.toLowerCase());
+    for (const [company, offers] of Object.entries(groupedOffers)) {
+        if (offers.length >= maxOffersPerCompany && !ignoredCompanies.includes(company.toLowerCase())) {
+            ignoredCompanies.push(company.toLowerCase());
         }
     }
     writeIgnoredCompanies(ignoredCompanies);
 
-    const ignoredOffers = offers.filter(offer => !ignoredCompanies.includes(offer.firm.toLowerCase()));
+    const ignoredOffers = offers.filter(offer => !ignoredCompanies.includes(offer.company.toLowerCase()));
 
     const specificFilter = website.filterOffers || (offers => offers);
     return specificFilter(ignoredOffers);
@@ -59,7 +62,7 @@ async function getFilteredOffers(website, query) {
     const formattedOffers = offers.map(website.formatOffer);
     const filteredOffers = filterOffers(website, formattedOffers);
     const offersCount = filteredOffers.length;
-    console.log(`Found ${offersCount} offers`);
+    console.log(`Kept ${offersCount} offers`);
 
     return filteredOffers;
 }

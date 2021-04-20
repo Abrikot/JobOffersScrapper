@@ -54,7 +54,7 @@ function getOffersInChunk(data) {
 function formatOffer(offer) {
     return {
         name: offer.intituleSurbrillance,
-        firm: offer.nomCommercial,
+        company: offer.nomCommercial,
         date: new Date(offer.datePublication),
         salary: offer.salaireTexte,
         link: getDisplayUrl(offer.numeroOffre),

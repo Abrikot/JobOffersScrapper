@@ -29,8 +29,8 @@ async function getChunkOfData(query, startIndex = 0) {
   return data.data.results[0];
 }
 
-function getDisplayUrl(firmSlug, offerSlug) {
-  return `https://www.welcometothejungle.com/fr/companies/${firmSlug}/jobs/${offerSlug}`;
+function getDisplayUrl(companySlug, offerSlug) {
+  return `https://www.welcometothejungle.com/fr/companies/${companySlug}/jobs/${offerSlug}`;
 }
 
 function getTotalNumberOfOffers(data) {
@@ -49,7 +49,7 @@ function filterOffers(offers) {
 function formatOffer(offer) {
   return {
     name: offer.name,
-    firm: offer.organization.name,
+    company: offer.organization.name,
     date: new Date(offer.published_at),
     salary: '-',
     link: getDisplayUrl(offer.organization.website_organization.slug, offer.slug),
