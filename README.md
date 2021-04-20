@@ -18,6 +18,6 @@ module.exports = {
     }
 };
 ```
-These information can be found in any request on LinkedIn search feature.
+This information can be found in any request on LinkedIn search feature.
 
 Once everything's fine, you can run `node src/main.js`. It'll start scrapping website. When it's done, a `offers.html` file we'll be created in the workspace.
