@@ -77,10 +77,6 @@ function getDisplayLink(offer) {
     return 'https://www.linkedin.com/jobs/search/?currentJobId=' + parts[parts.length - 1];
 }
 
-function filterOffers(offers) {
-    return offers.filter(offer => offer.company);
-}
-
 function formatOffer(offer) {
     return {
         name: offer.title,
@@ -94,6 +90,5 @@ function formatOffer(offer) {
 
 exports.getTotalNumberOfOffers = getTotalNumberOfOffers;
 exports.getOffersInChunk = getOffersInChunk;
-// exports.filterOffers = filterOffers;
 exports.formatOffer = formatOffer;
 exports.getChunkOfData = getChunkOfData;
