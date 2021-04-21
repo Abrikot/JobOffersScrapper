@@ -1,5 +1,5 @@
 {
-  "name": "get_apec_offers",
+  "name": "job_offers_scrapper",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "mongodb": "^3.6.6"
   }
 }
