@@ -3,8 +3,8 @@ import { Offer } from '../model/offer';
 import { Website } from '../model/website';
 
 export class WelcomeToTheJungle extends Website {
-  private location = '45.75917,4.82966'; // Lyon
-  private queryUrl = 'https://csekhvms53-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%20(lite)%203.24.12%3Breact-instantsearch%205.3.2%3BJS%20Helper%20(2.28.1)&x-algolia-application-id=CSEKHVMS53&x-algolia-api-key=02f0d440abc99cae37e126886438b266';
+  private static location = '45.75917,4.82966'; // Lyon
+  private static queryUrl = 'https://csekhvms53-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%20(lite)%203.24.12%3Breact-instantsearch%205.3.2%3BJS%20Helper%20(2.28.1)&x-algolia-application-id=CSEKHVMS53&x-algolia-api-key=02f0d440abc99cae37e126886438b266';
 
   constructor() {
     super('Welcome to the Jungle');
@@ -22,13 +22,13 @@ export class WelcomeToTheJungle extends Website {
       offer['organization']['name'] as string,
       new Date(offer['published_at'] as string),
       '-',
-      this.getDisplayUrl(offer['organization']['website_organization']['slug'], offer['slug'] as string),
+      WelcomeToTheJungle.getDisplayUrl(offer['organization']['website_organization']['slug'], offer['slug'] as string),
       offer
     )
   }
   public async getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>> {
     const encodedQuery = encodeURIComponent(query);
-    const encodedLocation = encodeURIComponent(this.location);
+    const encodedLocation = encodeURIComponent(WelcomeToTheJungle.location);
     const params = {
       "requests": [
         {
@@ -47,12 +47,12 @@ export class WelcomeToTheJungle extends Website {
         'Referer': 'https://www.welcometothejungle.com/'
       }
     };
-    const data = await axios.post(this.queryUrl, params, config);
+    const data = await axios.post(WelcomeToTheJungle.queryUrl, params, config);
 
     return data.data.results[0];
   }
 
-  private getDisplayUrl(companySlug: string, offerSlug: string) {
+  private static getDisplayUrl(companySlug: string, offerSlug: string) {
     return `https://www.welcometothejungle.com/fr/companies/${companySlug}/jobs/${offerSlug}`;
   }
 }

@@ -5,21 +5,21 @@ import { Website } from '../model/website';
 export class Apec extends Website {
     private range = 100;
 
-    private queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
-    private displayUrl = 'https://www.apec.fr/candidat/recherche-emploi.html/emploi/detail-offre/';
+    private static queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
+    private static displayUrl = 'https://www.apec.fr/candidat/recherche-emploi.html/emploi/detail-offre/';
 
-    private locations = [
+    private static locations = [
         "596717"    // Lyon
     ];
 
-    minScore = 15;
+    private static minScore = 15;
 
     constructor() {
         super('Apec');
     }
 
-    private getDisplayUrl(offerNumber: string): string {
-        return this.displayUrl + offerNumber;
+    private static getDisplayUrl(offerNumber: string): string {
+        return Apec.displayUrl + offerNumber;
     }
 
     public getTotalNumberOfOffers(data: Record<string, unknown>): number {
@@ -35,13 +35,13 @@ export class Apec extends Website {
             offer.nomCommercial as string,
             new Date(offer['datePublication'] as string),
             offer.salaireTexte as string,
-            this.getDisplayUrl(offer['numeroOffre'] as string),
+            Apec.getDisplayUrl(offer['numeroOffre'] as string),
             offer
         );
     }
     public async getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>> {
         const params = {
-            "lieux": this.locations,
+            "lieux": Apec.locations,
             "fonctions": [],
             "statutPoste": [],
             "typesContrat": [],
@@ -58,11 +58,11 @@ export class Apec extends Website {
             "pointGeolocDeReference": { "distance": 0 },
             "motsCles": query
         };
-        const data = await axios.post(this.queryUrl, params);
+        const data = await axios.post(Apec.queryUrl, params);
         return data.data;
     }
 
     public filterOffers(offers: Offer[]): Offer[] {
-        return offers.filter(offer => offer.getOriginalOffer.score > this.minScore);
+        return offers.filter(offer => offer.getOriginalOffer.score > Apec.minScore);
     }
 }

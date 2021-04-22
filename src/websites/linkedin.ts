@@ -4,7 +4,7 @@ import { Offer } from '../model/offer';
 import { Website } from '../model/website';
 
 export class LinkedIn extends Website {
-    private companies = new Map();
+    private static companies = new Map();
 
     constructor() {
         super('LinkedIn');
@@ -22,7 +22,7 @@ export class LinkedIn extends Website {
             offer['companyDetails']['companyName'] as string,
             new Date(offer['listedAt'] as string),
             '-',
-            this.getDisplayLink(offer),
+            LinkedIn.getDisplayLink(offer),
             offer
         )
     }
@@ -64,10 +64,10 @@ export class LinkedIn extends Website {
         const data = await axios.get(queryUrl, config);
 
         const companiesDefinition = data.data.included.filter(element => element['$type'] === 'com.linkedin.voyager.organization.Company');
-        companiesDefinition.forEach(companyDefinition => this.companies.set(companyDefinition.entityUrn, companyDefinition.name));
+        companiesDefinition.forEach(companyDefinition => LinkedIn.companies.set(companyDefinition.entityUrn, companyDefinition.name));
 
         const offers = data.data.included.filter(element => element['$type'] === 'com.linkedin.voyager.jobs.JobPosting');
-        offers.forEach(this.normalizeOfferCompanyName);
+        offers.forEach(LinkedIn.normalizeOfferCompanyName);
         const offersWithCompanyName = offers.filter(offer => offer.companyDetails.companyName); // We don't want offers which are not linked to any company
 
         return {
@@ -76,15 +76,15 @@ export class LinkedIn extends Website {
         };
     }
 
-    private getCompanyName(offer: Record<string, unknown>) {
-        return offer.companyDetails['companyName'] || this.companies.get(offer.companyDetails['company']);
+    private static getCompanyName(offer: Record<string, unknown>) {
+        return offer.companyDetails['companyName'] || LinkedIn.companies.get(offer.companyDetails['company']);
     }
 
-    private normalizeOfferCompanyName(offer: Record<string, unknown>) {
-        offer.companyDetails['companyName'] = this.getCompanyName(offer);
+    private static normalizeOfferCompanyName(offer: Record<string, unknown>) {
+        offer.companyDetails['companyName'] = LinkedIn.getCompanyName(offer);
     }
 
-    private getDisplayLink(offer: Record<string, unknown>) {
+    private static getDisplayLink(offer: Record<string, unknown>) {
         if (offer['applyMethod']['companyApplyUrl']) {
             return offer['applyMethod']['companyApplyUrl'];
         }
