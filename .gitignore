@@ -3,5 +3,5 @@
 /offers.html
 /ignoredCompanies.json
 /package-lock.json
-/src/websites/credentials.js
+/src/websites/credentials.ts
 /dist

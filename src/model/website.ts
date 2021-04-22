@@ -1,17 +1,19 @@
-abstract class Website {
+import { Offer } from "./offer";
+
+export abstract class Website {
     private name: string;
 
     constructor(name: string) {
         this.name = name;
     }
 
-    abstract getTotalNumberOfOffers(data: object[]): Number;
+    abstract getTotalNumberOfOffers(data: Record<string, unknown>): number;
 
-    abstract getOffersInChunk(data: object[]): object[];
+    abstract getOffersInChunk(data: Record<string, unknown>): Record<string, unknown>[];
 
-    abstract formatOffer(offer: object): Offer;
+    abstract formatOffer(offer: Record<string, unknown>): Offer;
 
-    abstract getChunkOfData(query: string, startIndex: Number): object[];
+    abstract getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>>;
 
     /**
     * filterOffers
@@ -19,4 +21,10 @@ abstract class Website {
     public filterOffers(offers: Offer[]): Offer[] {
         return offers;
     }
+
+    
+    public get getName() : string {
+        return this.name;
+    }
+    
 }

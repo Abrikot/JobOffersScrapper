@@ -1,17 +1,17 @@
-class Offer {
+export class Offer {
     private name: string;
     private company: string;
     private date: Date;
     private salary: string;
     private link: string;
-    private originalOffer: object;
+    private originalOffer: Record<string, unknown>;
 
     constructor(name: string,
         company: string,
         date: Date,
         salary: string,
         link: string,
-        originalOffer: object) {
+        originalOffer: Record<string, unknown>) {
         this.name = name;
         this.company = company;
         this.date = date;
@@ -40,7 +40,7 @@ class Offer {
         return this.link;
     }
 
-    public get getOriginalOffer(): object {
+    public get getOriginalOffer(): Record<string, unknown> {
         return this.originalOffer;
     }
 }
