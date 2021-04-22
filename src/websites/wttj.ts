@@ -3,8 +3,8 @@ import { Offer } from '../model/offer';
 import { Website } from '../model/website';
 
 export class WelcomeToTheJungle extends Website {
-  location = '45.75917,4.82966'; // Lyon
-  queryUrl = 'https://csekhvms53-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%20(lite)%203.24.12%3Breact-instantsearch%205.3.2%3BJS%20Helper%20(2.28.1)&x-algolia-application-id=CSEKHVMS53&x-algolia-api-key=02f0d440abc99cae37e126886438b266';
+  private location = '45.75917,4.82966'; // Lyon
+  private queryUrl = 'https://csekhvms53-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%20(lite)%203.24.12%3Breact-instantsearch%205.3.2%3BJS%20Helper%20(2.28.1)&x-algolia-application-id=CSEKHVMS53&x-algolia-api-key=02f0d440abc99cae37e126886438b266';
 
   constructor() {
     super('Welcome to the Jungle');

@@ -3,12 +3,12 @@ import { Offer } from '../model/offer';
 import { Website } from '../model/website';
 
 export class Apec extends Website {
-    range = 100;
+    private range = 100;
 
-    queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
-    displayUrl = 'https://www.apec.fr/candidat/recherche-emploi.html/emploi/detail-offre/';
+    private queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
+    private displayUrl = 'https://www.apec.fr/candidat/recherche-emploi.html/emploi/detail-offre/';
 
-    locations = [
+    private locations = [
         "596717"    // Lyon
     ];
 

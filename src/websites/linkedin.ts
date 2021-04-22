@@ -4,7 +4,7 @@ import { Offer } from '../model/offer';
 import { Website } from '../model/website';
 
 export class LinkedIn extends Website {
-    companies = new Map();
+    private companies = new Map();
 
     constructor() {
         super('LinkedIn');
