@@ -29,7 +29,6 @@ export class Apec extends Website {
         return data['resultats'] as Record<string, unknown>[];
     }
     public formatOffer(offer: Record<string, unknown>): Offer {
-        console.log(this);
         return new Offer(
             offer.intituleSurbrillance as string,
             offer.nomCommercial as string,
