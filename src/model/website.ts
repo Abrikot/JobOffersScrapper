@@ -7,15 +7,11 @@ export abstract class Website {
         this._name = name;
     }
 
-    abstract getTotalNumberOfOffers(data: Record<string, unknown>): number;
+    protected abstract getAllOffers(query: string): Promise<Record<string, unknown>[]>;
+    
+    public abstract getFilteredOffers(query: string): Promise<Offer[]>;
 
-    abstract getOffersInChunk(data: Record<string, unknown>): Record<string, unknown>[];
-
-    abstract formatOffer(offer: Record<string, unknown>): Offer;
-
-    abstract getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>>;
-
-    public filterOffers(offers: Offer[]): Offer[] {
+    protected specificFilterOffers(offers: Offer[]): Offer[] {
         return offers;
     }
     

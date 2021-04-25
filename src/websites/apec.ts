@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { JsonWebsite } from '../model/jsonWebsite';
 import { Offer } from '../model/offer';
-import { Website } from '../model/website';
 
-export class Apec extends Website {
+export class Apec extends JsonWebsite {
     private range = 100;
 
     private static queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
@@ -61,7 +61,7 @@ export class Apec extends Website {
         return data.data;
     }
 
-    public filterOffers(offers: Offer[]): Offer[] {
+    public specificFilterOffers(offers: Offer[]): Offer[] {
         return offers.filter(offer => offer.originalOffer.score > Apec.minScore);
     }
 }

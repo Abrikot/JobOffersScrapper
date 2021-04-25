@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { credentials } from './credentials';
 import { Offer } from '../model/offer';
-import { Website } from '../model/website';
+import { JsonWebsite } from '../model/jsonWebsite';
 
-export class LinkedIn extends Website {
+export class LinkedIn extends JsonWebsite {
     private static companies = new Map();
 
     constructor() {
