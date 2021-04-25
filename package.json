@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "fs": "0.0.1-security",
+    "jsdom": "^16.5.3",
     "mongodb": "^3.6.6",
     "typescript": "^4.2.4"
   },
