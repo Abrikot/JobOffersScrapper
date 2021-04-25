@@ -61,11 +61,16 @@ function filterOffers(website: Website, offers: Offer[]): Offer[] {
 }
 
 export async function getFilteredOffers(website: Website, query: string): Promise<Offer[]> {
-    const offers: Record<string, unknown>[] = await getAllOffers(website, query);
-    const formattedOffers: Offer[] = offers.map(website.formatOffer);
-    const filteredOffers: Offer[] = filterOffers(website, formattedOffers);
-    const offersCount: number = filteredOffers.length;
-    console.log(`Kept ${offersCount} offers`);
-
-    return filteredOffers;
+    try {
+        const offers: Record<string, unknown>[] = await getAllOffers(website, query);
+        const formattedOffers: Offer[] = offers.map(website.formatOffer);
+        const filteredOffers: Offer[] = filterOffers(website, formattedOffers);
+        const offersCount: number = filteredOffers.length;
+        console.log(`Kept ${offersCount} offers`);
+    
+        return filteredOffers;   
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
 }
