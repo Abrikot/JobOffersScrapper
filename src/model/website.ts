@@ -7,9 +7,16 @@ export abstract class Website {
         this._name = name;
     }
 
-    protected abstract getAllOffers(query: string): Promise<Record<string, unknown>[]>;
+    protected abstract getAllOffers(query: string): Promise<Offer[]>;
     
-    public abstract getFilteredOffers(query: string): Promise<Offer[]>;
+    public async getFilteredOffers(query: string): Promise<Offer[]> {
+        const offers: Offer[] = await this.getAllOffers(query);
+        const filteredOffers: Offer[] = this.specificFilterOffers(offers);
+        const offersCount: number = filteredOffers.length;
+        console.log(`Kept ${offersCount} offers`);
+    
+        return filteredOffers;
+    }
 
     protected specificFilterOffers(offers: Offer[]): Offer[] {
         return offers;
@@ -18,5 +25,4 @@ export abstract class Website {
     public get name() : string {
         return this._name;
     }
-    
 }

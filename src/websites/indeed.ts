@@ -1,9 +1,10 @@
 import axios from "axios";
 import { JSDOM } from 'jsdom';
+import { HtmlOffersChunk } from "../model/htmlOffersChunk";
+import { HtmlWebsite } from "../model/htmlWebsite";
 import { Offer } from "../model/offer";
-import { Website } from "../model/website";
 
-export class Indeed extends Website {
+export class Indeed extends HtmlWebsite {
     private static displayUrl = 'https://fr.indeed.com';
 
     constructor() {
@@ -19,7 +20,7 @@ export class Indeed extends Website {
     formatOffer(offer: Record<string, unknown>): Offer {
         return offer as unknown as Offer;
     }
-    async getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>> {
+    async getChunkOfData(query: string, startIndex: number): Promise<HtmlOffersChunk> {
         const encodedQuery = encodeURIComponent(query);
         const queryUrl = `https://fr.indeed.com/jobs?q=${encodedQuery}`
         + `&l=Lyon+%2869%29`
@@ -42,10 +43,10 @@ export class Indeed extends Website {
             throw new Error('Indeed uses a CATPCHA when detecting a bot. Try using a proxy to unblock the scrapper.');
         }
 
-        return {
-            offers: Indeed.getOffersFromDocument(document),
-            totalNumberOfOffers: Indeed.getTotalNumberOfOffersFromHtml(document)
-        };
+        return new HtmlOffersChunk(
+            Indeed.getOffersFromDocument(document),
+            Indeed.getTotalNumberOfOffersFromHtml(document)
+        );
     }
 
     private static getOffersFromDocument(document: HTMLDocument): Offer[] {
