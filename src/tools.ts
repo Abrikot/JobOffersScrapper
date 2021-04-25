@@ -54,7 +54,7 @@ function filterOffers(website: Website, offers: Offer[]): Offer[] {
     }
     writeIgnoredCompanies(ignoredCompanies);
 
-    const notIgnoredOffers = offers.filter(offer => !ignoredCompanies.includes(offer.getCompany.toLowerCase()));
+    const notIgnoredOffers = offers.filter(offer => !ignoredCompanies.includes(offer.company.toLowerCase()));
 
     const specificFilter = website.filterOffers || (offers => offers);
     return specificFilter(notIgnoredOffers);

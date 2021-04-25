@@ -1,10 +1,10 @@
 import { Offer } from "./offer";
 
 export abstract class Website {
-    private name: string;
+    private _name: string;
 
     constructor(name: string) {
-        this.name = name;
+        this._name = name;
     }
 
     abstract getTotalNumberOfOffers(data: Record<string, unknown>): number;
@@ -15,16 +15,12 @@ export abstract class Website {
 
     abstract getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>>;
 
-    /**
-    * filterOffers
-    */
     public filterOffers(offers: Offer[]): Offer[] {
         return offers;
     }
-
     
-    public get getName() : string {
-        return this.name;
+    public get name() : string {
+        return this._name;
     }
     
 }

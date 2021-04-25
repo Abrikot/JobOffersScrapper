@@ -62,6 +62,6 @@ export class Apec extends Website {
     }
 
     public filterOffers(offers: Offer[]): Offer[] {
-        return offers.filter(offer => offer.getOriginalOffer.score > Apec.minScore);
+        return offers.filter(offer => offer.originalOffer.score > Apec.minScore);
     }
 }
