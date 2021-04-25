@@ -84,8 +84,8 @@ export class Indeed extends Website {
 
     private static getDateFromAge(phrasedAge: string): Date {
         const normalizedPhrasedAge = phrasedAge.replace(Indeed.normalizeSpacesPattern, ' ');
-        const age = Indeed.matchStringPattern(Indeed.moreThanXDaysPattern, phrasedAge)
-            || Indeed.matchStringPattern(Indeed.exactXDaysPattern, phrasedAge);
+        const age = Indeed.matchStringPattern(Indeed.moreThanXDaysPattern, normalizedPhrasedAge)
+            || Indeed.matchStringPattern(Indeed.exactXDaysPattern, normalizedPhrasedAge);
 
         if (!age) return undefined;
 
