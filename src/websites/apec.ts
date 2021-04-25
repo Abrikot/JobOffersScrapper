@@ -18,7 +18,7 @@ export class Apec extends Website {
         super('Apec');
     }
 
-    private static getDisplayUrl(offerNumber: string): string {
+    private getDisplayUrl(offerNumber: string): string {
         return Apec.displayUrl + offerNumber;
     }
 
@@ -34,7 +34,7 @@ export class Apec extends Website {
             offer.nomCommercial as string,
             new Date(offer['datePublication'] as string),
             offer.salaireTexte as string,
-            Apec.getDisplayUrl(offer['numeroOffre'] as string),
+            this.getDisplayUrl(offer['numeroOffre'] as string),
             offer
         );
     }

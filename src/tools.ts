@@ -62,7 +62,7 @@ function filterOffers(website: Website, offers: Offer[]): Offer[] {
 
 export async function getFilteredOffers(website: Website, query: string): Promise<Offer[]> {
     const offers: Record<string, unknown>[] = await getAllOffers(website, query);
-    const formattedOffers: Offer[] = offers.map(website.formatOffer);
+    const formattedOffers: Offer[] = offers.map(offer => website.formatOffer(offer));
     const filteredOffers: Offer[] = filterOffers(website, formattedOffers);
     const offersCount: number = filteredOffers.length;
     console.log(`Kept ${offersCount} offers`);

@@ -7,6 +7,10 @@ export abstract class Website {
         this.name = name;
     }
 
+    public test() {
+        console.log(this);
+    }
+
     abstract getTotalNumberOfOffers(data: Record<string, unknown>): number;
 
     abstract getOffersInChunk(data: Record<string, unknown>): Record<string, unknown>[];
