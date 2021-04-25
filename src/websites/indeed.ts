@@ -20,6 +20,7 @@ export class Indeed extends HtmlWebsite {
     formatOffer(offer: Record<string, unknown>): Offer {
         return offer as unknown as Offer;
     }
+
     async getChunkOfData(query: string, startIndex: number): Promise<HtmlOffersChunk> {
         const encodedQuery = encodeURIComponent(query);
         const queryUrl = `https://fr.indeed.com/jobs?q=${encodedQuery}`
