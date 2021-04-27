@@ -14,22 +14,25 @@ function makeHtml(offers) {
             + `<td><a href="${offer.link}">${offer.name}</a></td>`
             + `<td>${offer.salary}</td>`
             + `</tr>`;
-
-        if (!offer.link)
-            console.log(offer.link, offer.name);
     }
-    html += '</table>';
+    html += '</table>'
+        + `<div>Generated on ${new Date().toLocaleString()}</div>`;
     fs.writeFileSync(config.resultFile, html);
 }
 
 async function getAllOffers(query) {
     const offers = [];
     for (const website of config.websites) {
-        console.log('Retrieving offers from', website.getName);
-        const newOffers = await tools.getFilteredOffers(website, query);
+        console.log('Retrieving offers from', website.name);
+        const newOffers = await website.getFilteredOffers(query);
         offers.push(...newOffers);
     }
-    return offers;
+    const filteredOffers = tools.filterOffers(offers);
+    console.log('-------------');
+    console.log(`Kept a total of ${filteredOffers.length} offers.`)
+    return filteredOffers;
 }
 
-getAllOffers(config.query).then(makeHtml).catch(e => console.error(e));
+getAllOffers(config.query)
+    .then(makeHtml)
+    .catch(e => console.error(e));

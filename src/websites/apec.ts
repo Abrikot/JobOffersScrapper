@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { JsonWebsite } from '../model/jsonWebsite';
 import { Offer } from '../model/offer';
-import { Website } from '../model/website';
 
-export class Apec extends Website {
+export class Apec extends JsonWebsite {
     private range = 100;
 
     private static queryUrl = 'https://www.apec.fr/cms/webservices/rechercheOffre';
@@ -18,7 +18,7 @@ export class Apec extends Website {
         super('Apec');
     }
 
-    private static getDisplayUrl(offerNumber: string): string {
+    private getDisplayUrl(offerNumber: string): string {
         return Apec.displayUrl + offerNumber;
     }
 
@@ -34,7 +34,7 @@ export class Apec extends Website {
             offer.nomCommercial as string,
             new Date(offer['datePublication'] as string),
             offer.salaireTexte as string,
-            Apec.getDisplayUrl(offer['numeroOffre'] as string),
+            this.getDisplayUrl(offer['numeroOffre'] as string),
             offer
         );
     }
@@ -61,7 +61,7 @@ export class Apec extends Website {
         return data.data;
     }
 
-    public filterOffers(offers: Offer[]): Offer[] {
-        return offers.filter(offer => offer.getOriginalOffer.score > Apec.minScore);
+    public specificFilterOffers(offers: Offer[]): Offer[] {
+        return offers.filter(offer => offer.originalOffer.score > Apec.minScore);
     }
 }

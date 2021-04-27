@@ -1,10 +1,10 @@
 export class Offer {
-    private name: string;
-    private company: string;
-    private date: Date;
-    private salary: string;
-    private link: string;
-    private originalOffer: Record<string, unknown>;
+    private _name: string;
+    private _company: string;
+    private _date: Date;
+    private _salary: string;
+    private _link: string;
+    private _originalOffer: Record<string, unknown>;
 
     constructor(name: string,
         company: string,
@@ -12,35 +12,35 @@ export class Offer {
         salary: string,
         link: string,
         originalOffer: Record<string, unknown>) {
-        this.name = name;
-        this.company = company;
-        this.date = date;
-        this.salary = salary;
-        this.link = link;
-        this.originalOffer = originalOffer;
+        this._name = name;
+        this._company = company;
+        this._date = date;
+        this._salary = salary;
+        this._link = link;
+        this._originalOffer = originalOffer;
     }
 
-    public get getName(): string {
-        return this.name;
+    public get name(): string {
+        return this._name;
     }
 
-    public get getCompany(): string {
-        return this.company;
+    public get company(): string {
+        return this._company;
     }
 
-    public get getDate(): Date {
-        return this.date;
+    public get date(): Date {
+        return this._date;
     }
 
-    public get getSalary(): string {
-        return this.salary;
+    public get salary(): string {
+        return this._salary;
     }
 
-    public get getLink(): string {
-        return this.link;
+    public get link(): string {
+        return this._link;
     }
 
-    public get getOriginalOffer(): Record<string, unknown> {
-        return this.originalOffer;
+    public get originalOffer(): Record<string, unknown> {
+        return this._originalOffer;
     }
 }
