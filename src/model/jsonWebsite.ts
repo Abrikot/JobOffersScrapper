@@ -2,15 +2,15 @@ import { Offer } from "./offer";
 import { Website } from "./website";
 
 export abstract class JsonWebsite extends Website {
+    protected abstract getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>>;
+    
     abstract getTotalNumberOfOffers(data: Record<string, unknown>): number;
 
     abstract getOffersInChunk(data: Record<string, unknown>): Record<string, unknown>[];
 
     abstract formatOffer(offer: Record<string, unknown>): Offer;
-
-    abstract getChunkOfData(query: string, startIndex: number): Promise<Record<string, unknown>>;
     
-    protected async getAllOffers(query: string): Promise<Record<string, unknown>[]> {
+    protected async getAllOffers(query: string): Promise<Offer[]> {
         const offers = [];
     
         let startIndex = 0;
@@ -29,16 +29,6 @@ export abstract class JsonWebsite extends Website {
             }
         } while (startIndex < totalNumber)
     
-        return offers;
-    }
-    
-    public async getFilteredOffers(query: string): Promise<Offer[]> {
-        const offers: Record<string, unknown>[] = await this.getAllOffers(query);
-        const formattedOffers: Offer[] = offers.map(offer => this.formatOffer(offer));
-        const filteredOffers: Offer[] = this.specificFilterOffers(formattedOffers);
-        const offersCount: number = filteredOffers.length;
-        console.log(`Kept ${offersCount} offers`);
-    
-        return filteredOffers;
+        return offers.map(offer => this.formatOffer(offer));
     }
 }
