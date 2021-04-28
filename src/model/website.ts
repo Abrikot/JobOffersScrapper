@@ -10,12 +10,17 @@ export abstract class Website {
     protected abstract getAllOffers(query: string): Promise<Offer[]>;
     
     public async getFilteredOffers(query: string): Promise<Offer[]> {
-        const offers: Offer[] = await this.getAllOffers(query);
-        const filteredOffers: Offer[] = this.specificFilterOffers(offers);
-        const offersCount: number = filteredOffers.length;
-        console.log(`Kept ${offersCount} offers`);
-    
-        return filteredOffers;
+        try {
+            const offers: Offer[] = await this.getAllOffers(query);
+            const filteredOffers: Offer[] = this.specificFilterOffers(offers);
+            const offersCount: number = filteredOffers.length;
+            console.log(`Kept ${offersCount} offers`);
+        
+            return filteredOffers;
+        } catch(e) {
+            console.error(e);
+            return [];
+        }
     }
 
     protected specificFilterOffers(offers: Offer[]): Offer[] {
