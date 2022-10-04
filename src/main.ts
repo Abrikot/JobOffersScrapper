@@ -5,7 +5,12 @@ import * as config from './config';
 fs.unlink(config.resultFile, () => { });
 
 function makeHtml(offers) {
-    let html = '<table>'
+    let html = '<html>'
+        + '<head>'
+        + '<style>tr:hover {background-color: lightblue;}</style>'
+        + '</head>'
+        + '<body>'
+        + '<table>'
         + '<tr><th>Entreprise</th><th>Date publication</th><th>Intitulé</th><th>Salaire</th></tr>';
     for (const offer of offers.sort((a, b) => b.date - a.date)) {
         html += `<tr>`
@@ -16,7 +21,10 @@ function makeHtml(offers) {
             + `</tr>`;
     }
     html += '</table>'
-        + `<div>Generated on ${new Date().toLocaleString()}</div>`;
+        + `<div>Generated on ${new Date().toLocaleString()}</div>`
+        + '</body>'
+        + '</html>';
+
     fs.writeFileSync(config.resultFile, html);
 }
 
