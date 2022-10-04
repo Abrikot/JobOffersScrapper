@@ -12,7 +12,7 @@ export const websites: Website[] = [
     new Apec(),
     new WelcomeToTheJungle(),
     new LinkedIn(),
-    new Indeed()
+    // new Indeed()
 ];
 
 console.log('Loading config');
